@@ -1,34 +1,37 @@
 
 import React, { useState, useEffect } from 'react';
-import { Play, Users, TrendingUp, CheckCircle, Calendar, ArrowRight, Star, Clock, DollarSign } from 'lucide-react';
+import { Play, Users, TrendingUp, CheckCircle, Calendar, ArrowRight, Star, Clock, DollarSign, Menu, X, XCircle } from 'lucide-react';
 
 const Index = () => {
   const [roiData, setRoiData] = useState({
-    weeklyHours: 40,
-    clientsPerMonth: 2,
-    offerPrice: 10000
+    weeklyHours: 60,
+    clientsPerMonth: 7,
+    offerPrice: 2500
   });
 
   const [calculatedROI, setCalculatedROI] = useState({
     hoursSaved: 0,
-    extraClients: 0,
+    newClients: 0,
     addedRevenue: 0
   });
 
   const [animatedNumbers, setAnimatedNumbers] = useState({
     hoursSaved: 0,
-    extraClients: 0,
+    newClients: 0,
     addedRevenue: 0
   });
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
-    const hoursSaved = Math.round((roiData.weeklyHours * 4) * 0.3);
-    const extraClients = Math.floor(hoursSaved / 20);
-    const addedRevenue = extraClients * roiData.offerPrice;
+    const hoursSaved = Math.round((roiData.weeklyHours * 0.4) * 4);
+    const salesHours = hoursSaved;
+    const newClients = Math.round((salesHours / (roiData.weeklyHours / roiData.clientsPerMonth)) * 0.2);
+    const addedRevenue = newClients * roiData.offerPrice;
 
     setCalculatedROI({
       hoursSaved,
-      extraClients,
+      newClients,
       addedRevenue
     });
   }, [roiData]);
@@ -45,7 +48,7 @@ const Index = () => {
           const progress = currentStep / steps;
           setAnimatedNumbers({
             hoursSaved: Math.round(calculatedROI.hoursSaved * progress),
-            extraClients: Math.round(calculatedROI.extraClients * progress),
+            newClients: Math.round(calculatedROI.newClients * progress),
             addedRevenue: Math.round(calculatedROI.addedRevenue * progress)
           });
           currentStep++;
@@ -96,10 +99,101 @@ const Index = () => {
     "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=80&h=80&fit=crop&crop=face"
   ];
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden">
+      {/* Sticky Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700/50">
+        <div className="max-w-6xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">
+              SheetCEO
+            </div>
+            
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center space-x-8">
+              <button
+                onClick={() => scrollToSection('what-we-do')}
+                className="text-slate-300 hover:text-teal-400 transition-colors duration-300"
+              >
+                What We Do
+              </button>
+              <button
+                onClick={() => scrollToSection('testimonials')}
+                className="text-slate-300 hover:text-teal-400 transition-colors duration-300"
+              >
+                Testimonials
+              </button>
+              <button
+                onClick={() => scrollToSection('process')}
+                className="text-slate-300 hover:text-teal-400 transition-colors duration-300"
+              >
+                Our Process
+              </button>
+              <a 
+                href="https://calendly.com/eitanjacobs/1-on-1" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-6 py-2 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-white font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/25 hover:scale-105"
+              >
+                Get Your Free Roadmap
+              </a>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-white"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-slate-700">
+              <div className="flex flex-col space-y-4 pt-4">
+                <button
+                  onClick={() => scrollToSection('what-we-do')}
+                  className="text-slate-300 hover:text-teal-400 transition-colors text-left"
+                >
+                  What We Do
+                </button>
+                <button
+                  onClick={() => scrollToSection('testimonials')}
+                  className="text-slate-300 hover:text-teal-400 transition-colors text-left"
+                >
+                  Testimonials
+                </button>
+                <button
+                  onClick={() => scrollToSection('process')}
+                  className="text-slate-300 hover:text-teal-400 transition-colors text-left"
+                >
+                  Our Process
+                </button>
+                <a 
+                  href="https://calendly.com/eitanjacobs/1-on-1" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-6 py-2 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-white font-semibold text-center transition-all duration-300"
+                >
+                  Get Your Free Roadmap
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
+      <section className="relative min-h-screen flex items-center justify-center px-4 py-20 pt-32 animate-fade-in">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 via-blue-500/10 to-purple-500/10 opacity-30"></div>
         <div className="absolute top-20 left-20 w-72 h-72 bg-teal-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -112,12 +206,11 @@ const Index = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-teal-100 to-blue-100 bg-clip-text text-transparent leading-tight">
-            Scale Like a CEO—Save 50+ Hours/Month & Serve 4+ Clients
+            Get 4+ New Clients/Month Without Working More
           </h1>
           
           <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-            Break free from "job" mode and build real agencies by freeing 50+ hours monthly. 
-            Stop trading time for money—start scaling systematically.
+            We help agencies save 50+ hours/month so you can land 4+ new clients/month—contractually guaranteed.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
@@ -125,12 +218,12 @@ const Index = () => {
               href="https://calendly.com/eitanjacobs/1-on-1" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group relative px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105"
+              className="group relative px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 animate-pulse hover:animate-none"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-blue-400 rounded-lg blur opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative flex items-center">
                 <Calendar className="w-6 h-6 mr-2" />
-                Book Free Audit Call
+                Get Your Free Backend Audit + Custom Roadmap
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </div>
             </a>
@@ -142,7 +235,7 @@ const Index = () => {
           </div>
 
           {/* VSL Placeholder */}
-          <div className="relative max-w-4xl mx-auto">
+          <div id="what-we-do" className="relative max-w-4xl mx-auto">
             <div className="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 overflow-hidden group cursor-pointer hover:border-teal-500/50 transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
               <img 
@@ -165,10 +258,10 @@ const Index = () => {
       </section>
 
       {/* Trust Strip */}
-      <section className="py-12 border-y border-slate-700/50 bg-slate-800/30 backdrop-blur-sm">
+      <section className="py-12 border-y border-slate-700/50 bg-slate-800/30 backdrop-blur-sm animate-fade-in">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-8">
-            <p className="text-teal-400 font-semibold text-lg">Trusted by 14+ high-ticket agencies</p>
+            <p className="text-teal-400 font-semibold text-lg">Trusted by 14+ Businesses</p>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8">
             {trustLogos.map((logo, index) => (
@@ -178,6 +271,11 @@ const Index = () => {
                   alt={`Client ${index + 1}`}
                   className="w-16 h-16 rounded-full border-2 border-slate-600 group-hover:border-teal-400 transition-all duration-300 grayscale group-hover:grayscale-0"
                 />
+                <div className="absolute -top-2 -right-2 flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                  ))}
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             ))}
@@ -186,7 +284,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4">
+      <section id="testimonials" className="py-20 px-4 animate-fade-in">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
@@ -199,7 +297,7 @@ const Index = () => {
           
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="relative group">
+              <div key={index} className="relative group hover:scale-105 transition-transform duration-300">
                 <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 group-hover:border-teal-500/50 transition-all duration-300 h-full">
                   {testimonial.video && (
                     <div className="mb-6 relative">
@@ -253,7 +351,7 @@ const Index = () => {
       </section>
 
       {/* ROI Calculator */}
-      <section className="py-20 px-4 bg-slate-800/30">
+      <section className="py-20 px-4 bg-slate-800/30 animate-fade-in">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
@@ -315,19 +413,30 @@ const Index = () => {
                     </label>
                     <input
                       type="range"
-                      min="2000"
+                      min="500"
                       max="50000"
-                      step="1000"
+                      step="500"
                       value={roiData.offerPrice}
                       onChange={(e) => setRoiData({...roiData, offerPrice: parseInt(e.target.value)})}
                       className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer slider"
                     />
                     <div className="flex justify-between text-sm text-slate-400 mt-1">
-                      <span>$2K</span>
+                      <span>$500</span>
                       <span className="text-teal-400 font-bold">${roiData.offerPrice.toLocaleString()}</span>
                       <span>$50K</span>
                     </div>
                   </div>
+                </div>
+
+                <div className="mt-8 text-center">
+                  <a 
+                    href="https://calendly.com/eitanjacobs/1-on-1" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105"
+                  >
+                    See Your Strategy
+                  </a>
                 </div>
               </div>
             </div>
@@ -348,8 +457,14 @@ const Index = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-teal-400 text-sm">30% time reduction</div>
+                        <div className="text-teal-400 text-sm">40% time reduction</div>
                       </div>
+                    </div>
+                    <div className="mt-4 bg-slate-700 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-teal-400 to-blue-400 h-2 rounded-full transition-all duration-1000"
+                        style={{ width: `${Math.min((animatedNumbers.hoursSaved / 200) * 100, 100)}%` }}
+                      ></div>
                     </div>
                   </div>
 
@@ -358,13 +473,19 @@ const Index = () => {
                       <div className="flex items-center">
                         <Users className="w-8 h-8 text-blue-400 mr-3" />
                         <div>
-                          <div className="text-sm text-slate-300">Extra Clients/Month</div>
-                          <div className="text-3xl font-bold text-white">+{animatedNumbers.extraClients}</div>
+                          <div className="text-sm text-slate-300">New Clients/Month</div>
+                          <div className="text-3xl font-bold text-white">+{animatedNumbers.newClients}</div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-blue-400 text-sm">Same work hours</div>
+                        <div className="text-blue-400 text-sm">20% close rate</div>
                       </div>
+                    </div>
+                    <div className="mt-4 bg-slate-700 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-blue-400 to-purple-400 h-2 rounded-full transition-all duration-1000"
+                        style={{ width: `${Math.min((animatedNumbers.newClients / 10) * 100, 100)}%` }}
+                      ></div>
                     </div>
                   </div>
 
@@ -381,20 +502,13 @@ const Index = () => {
                         <div className="text-green-400 text-sm">Pure profit</div>
                       </div>
                     </div>
+                    <div className="mt-4 bg-slate-700 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-green-400 to-teal-400 h-2 rounded-full transition-all duration-1000"
+                        style={{ width: `${Math.min((animatedNumbers.addedRevenue / 100000) * 100, 100)}%` }}
+                      ></div>
+                    </div>
                   </div>
-                </div>
-
-                <div className="mt-8 text-center">
-                  <a 
-                    href="https://calendly.com/eitanjacobs/1-on-1" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105"
-                  >
-                    <Calendar className="w-6 h-6 mr-2" />
-                    Get These Results
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </a>
                 </div>
               </div>
             </div>
@@ -403,7 +517,7 @@ const Index = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 px-4">
+      <section id="process" className="py-20 px-4 animate-fade-in">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
@@ -412,6 +526,10 @@ const Index = () => {
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
               The exact framework we use to scale agencies systematically
             </p>
+            <div className="mt-6 inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full border border-green-500/30">
+              <CheckCircle className="w-5 h-5 mr-2 text-green-400" />
+              <span className="text-green-100 font-semibold">✅ 100% done-for-you. No technical skills required.</span>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -441,7 +559,7 @@ const Index = () => {
                 icon: "🚀"
               }
             ].map((item, index) => (
-              <div key={index} className="relative group">
+              <div key={index} className="relative group hover:scale-105 transition-transform duration-300">
                 <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 group-hover:border-teal-500/50 transition-all duration-300 h-full group-hover:-translate-y-2">
                   <div className="text-6xl mb-6">{item.icon}</div>
                   <div className="text-sm text-teal-400 font-bold mb-2">STEP {item.step}</div>
@@ -455,7 +573,7 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 px-4 bg-gradient-to-r from-slate-800 to-slate-900">
+      <section className="py-20 px-4 bg-gradient-to-r from-slate-800 to-slate-900 animate-fade-in">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
             Ready to Scale Like a CEO?
@@ -477,10 +595,10 @@ const Index = () => {
               href="https://calendly.com/eitanjacobs/1-on-1" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 animate-pulse hover:animate-none"
             >
               <Calendar className="w-6 h-6 mr-2" />
-              Book Free Audit Call
+              Get Your Free Backend Audit + Custom Roadmap
               <ArrowRight className="w-5 h-5 ml-2" />
             </a>
           </div>
@@ -502,6 +620,50 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Who This Isn't For Section */}
+      <section className="py-20 px-4 bg-slate-900/50 animate-fade-in">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Who This Isn't For
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                icon: <XCircle className="w-8 h-8 text-slate-400" />,
+                text: "Agency owners who like burnout",
+                subtext: "and enjoy working 80+ hour weeks forever"
+              },
+              {
+                icon: <XCircle className="w-8 h-8 text-slate-400" />,
+                text: "Leaders who want to run a 'job,' not a real business",
+                subtext: "and prefer being stuck in day-to-day operations"
+              },
+              {
+                icon: <XCircle className="w-8 h-8 text-slate-400" />,
+                text: "Founders who don't want more freedom and clarity",
+                subtext: "in their business operations and growth"
+              },
+              {
+                icon: <XCircle className="w-8 h-8 text-slate-400" />,
+                text: "Businesses who don't want to land more clients",
+                subtext: "and are satisfied with their current growth"
+              }
+            ].map((item, index) => (
+              <div key={index} className="flex items-start space-x-4 p-6 bg-slate-800/30 rounded-xl border border-slate-700 hover:border-slate-600 transition-colors duration-300">
+                {item.icon}
+                <div>
+                  <p className="text-slate-300 font-medium text-lg">{item.text}</p>
+                  <p className="text-slate-400 text-sm mt-1">{item.subtext}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-slate-700 py-12 px-4 bg-slate-900">
         <div className="max-w-6xl mx-auto">
@@ -516,7 +678,8 @@ const Index = () => {
             <div className="flex flex-wrap gap-8 text-sm text-slate-400">
               <a href="#privacy" className="hover:text-teal-400 transition-colors">Privacy Policy</a>
               <a href="#terms" className="hover:text-teal-400 transition-colors">Terms of Service</a>
-              <a href="mailto:contact@sheetceo.com" className="hover:text-teal-400 transition-colors">Contact</a>
+              <a href="mailto:eitan@sheetceo.com" className="hover:text-teal-400 transition-colors">eitan@sheetceo.com</a>
+              <a href="https://instagram.com/eitanjacobs" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">@eitanjacobs</a>
             </div>
           </div>
           
@@ -526,27 +689,45 @@ const Index = () => {
         </div>
       </footer>
 
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: linear-gradient(45deg, #14b8a6, #3b82f6);
-          cursor: pointer;
-          box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
-        }
+      {/* Custom Styles */}
+      <style>
+        {`
+          @keyframes fade-in {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
 
-        .slider::-moz-range-thumb {
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: linear-gradient(45deg, #14b8a6, #3b82f6);
-          cursor: pointer;
-          border: none;
-          box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
-        }
-      `}</style>
+          .animate-fade-in {
+            animation: fade-in 0.8s ease-out;
+          }
+
+          .slider::-webkit-slider-thumb {
+            appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #14b8a6, #3b82f6);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+          }
+
+          .slider::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #14b8a6, #3b82f6);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+          }
+        `}
+      </style>
     </div>
   );
 };
