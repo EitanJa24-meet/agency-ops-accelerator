@@ -5,7 +5,7 @@ import { Play, Users, TrendingUp, CheckCircle, Calendar, ArrowRight, Star, Clock
 const Index = () => {
   const [roiData, setRoiData] = useState({
     weeklyHours: 60,
-    clientsPerMonth: 7,
+    closeRate: 20,
     offerPrice: 3000
   });
 
@@ -24,9 +24,8 @@ const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const hoursSaved = Math.round((roiData.weeklyHours * 0.4) * 4);
-    const salesHours = hoursSaved;
-    const newClients = Math.round((salesHours / (roiData.weeklyHours / roiData.clientsPerMonth)) * 0.2);
+    const hoursSaved = Math.round((roiData.weeklyHours * 0.3) * 4);
+    const newClients = Math.ceil(hoursSaved * 0.4 * (roiData.closeRate / 100));
     const addedRevenue = newClients * roiData.offerPrice;
 
     setCalculatedROI({
@@ -68,7 +67,7 @@ const Index = () => {
       name: "Tamir Morris",
       company: "Closing Clients",
       website: "closingclients.io",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      image: "/lovable-uploads/2c1118eb-8e78-469f-92e2-4fca6b68ef78.png",
       quote: "Working with Eitan helped me save over 20 hours/week and have full control and clarity over my business.",
       revenue: "$50K+/mo",
       achievement: "Generated over $1.5M in sales & scaled his agency to $50K+/mo",
@@ -79,7 +78,7 @@ const Index = () => {
       name: "Julian Fraiquin",
       company: "Digital Marketing Expert", 
       website: "julianfraiquin.com",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      image: "/lovable-uploads/efd40486-bb26-4ae9-9d0d-009f9e2e4e93.png",
       quote: "Eitan helped me make my sales process so much easier and land more deals.",
       revenue: "$1.6M+",
       achievement: "Generated $1.6M+ for clients like @robthebank",
@@ -125,7 +124,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden">
       {/* Sticky Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700/50">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">
               SheetCEO
@@ -203,7 +202,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 py-20 pt-32 animate-fade-in">
+      <section className="relative min-h-screen flex items-center justify-center px-8 py-20 pt-32 animate-fade-in">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 via-blue-500/10 to-purple-500/10 opacity-30"></div>
         <div className="absolute top-20 left-20 w-72 h-72 bg-teal-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -215,7 +214,7 @@ const Index = () => {
             <span className="text-sm text-teal-100">14+ agencies scaled to $50K+/month</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-teal-100 to-blue-100 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-teal-100 to-blue-100 bg-clip-text text-transparent leading-tight">
             Get 4+ New Clients/Month Without Working More
           </h1>
           
@@ -266,7 +265,7 @@ const Index = () => {
 
       {/* Trust Strip */}
       <section className="py-12 border-y border-slate-700/50 bg-slate-800/30 backdrop-blur-sm animate-fade-in">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-8">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-4">
               <p className="text-teal-400 font-semibold text-lg">Trusted by 14+ Businesses</p>
@@ -283,7 +282,7 @@ const Index = () => {
                 <img 
                   src={logo} 
                   alt={`Client ${index + 1}`}
-                  className="w-16 h-16 rounded-full border-2 border-slate-600 group-hover:border-teal-400 transition-all duration-300 grayscale group-hover:grayscale-0"
+                  className="w-16 h-16 rounded-full border-2 border-slate-600 group-hover:border-teal-400 transition-all duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
@@ -293,10 +292,10 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="py-20 px-6 animate-fade-in">
+      <section id="testimonials" className="py-20 px-8 animate-fade-in">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Real Results from Real Agencies
             </h2>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -310,7 +309,7 @@ const Index = () => {
                 <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 group-hover:border-teal-500/50 transition-all duration-300 h-full">
                   {testimonial.video && (
                     <div className="mb-6 relative">
-                      <div className="aspect-video bg-slate-700 rounded-lg overflow-hidden relative cursor-pointer group">
+                      <div className="aspect-[9/16] bg-slate-700 rounded-lg overflow-hidden relative cursor-pointer group">
                         <iframe
                           src={testimonial.videoUrl?.includes('youtube.com/shorts') 
                             ? `https://www.youtube.com/embed/${testimonial.videoUrl.split('/shorts/')[1]?.split('?')[0]}`
@@ -322,11 +321,6 @@ const Index = () => {
                           allowFullScreen
                         ></iframe>
                       </div>
-                      {testimonial.achievement && (
-                        <div className="mt-3 text-sm text-teal-400 font-medium">
-                          {testimonial.achievement}
-                        </div>
-                      )}
                     </div>
                   )}
                   
@@ -361,8 +355,11 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-teal-400 font-bold">{testimonial.revenue}</div>
-                      <div className="text-xs text-slate-500">Revenue</div>
+                      <div className="text-teal-400 font-bold text-sm">
+                        {testimonial.name === "Tamir Morris" && "$50k+/mo scaled agency"}
+                        {testimonial.name === "Julian Fraiquin" && "$1.6M+ generated for clients"}
+                        {testimonial.name === "Marcus Johnson" && testimonial.revenue}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -373,10 +370,10 @@ const Index = () => {
       </section>
 
       {/* ROI Calculator */}
-      <section className="py-20 px-6 bg-slate-800/30 animate-fade-in">
+      <section className="py-20 px-8 bg-slate-800/30 animate-fade-in">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Calculate Your ROI
             </h2>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -392,89 +389,46 @@ const Index = () => {
                 
                 <div className="space-y-8">
                   <div>
-                    <label className="block text-lg font-medium text-slate-300 mb-4">
+                    <label className="block text-lg font-medium text-slate-300 mb-4 pb-2">
                       Weekly Work Hours
                     </label>
-                    <div className="space-y-4">
-                      <input
-                        type="range"
-                        min="10"
-                        max="100"
-                        value={roiData.weeklyHours}
-                        onChange={(e) => setRoiData({...roiData, weeklyHours: parseInt(e.target.value)})}
-                        className="w-full h-3 bg-slate-700 rounded-lg appearance-none cursor-pointer slider"
-                      />
-                      <input
-                        type="number"
-                        min="10"
-                        max="100"
-                        value={roiData.weeklyHours}
-                        onChange={(e) => setRoiData({...roiData, weeklyHours: parseInt(e.target.value) || 60})}
-                        className="w-full px-4 py-3 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-teal-400 focus:outline-none text-lg"
-                      />
-                      <div className="flex justify-between text-sm text-slate-400">
-                        <span>10h</span>
-                        <span>100h</span>
-                      </div>
-                    </div>
+                    <input
+                      type="number"
+                      min="10"
+                      max="100"
+                      value={roiData.weeklyHours}
+                      onChange={(e) => setRoiData({...roiData, weeklyHours: parseInt(e.target.value) || 60})}
+                      className="w-full px-6 py-4 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-teal-400 focus:outline-none text-xl"
+                    />
                   </div>
 
                   <div>
-                    <label className="block text-lg font-medium text-slate-300 mb-4">
-                      Clients Per Month
+                    <label className="block text-lg font-medium text-slate-300 mb-4 pb-2">
+                      Close Rate (%)
                     </label>
-                    <div className="space-y-4">
-                      <input
-                        type="range"
-                        min="1"
-                        max="20"
-                        value={roiData.clientsPerMonth}
-                        onChange={(e) => setRoiData({...roiData, clientsPerMonth: parseInt(e.target.value)})}
-                        className="w-full h-3 bg-slate-700 rounded-lg appearance-none cursor-pointer slider"
-                      />
-                      <input
-                        type="number"
-                        min="1"
-                        max="20"
-                        value={roiData.clientsPerMonth}
-                        onChange={(e) => setRoiData({...roiData, clientsPerMonth: parseInt(e.target.value) || 7})}
-                        className="w-full px-4 py-3 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-teal-400 focus:outline-none text-lg"
-                      />
-                      <div className="flex justify-between text-sm text-slate-400">
-                        <span>1</span>
-                        <span>20</span>
-                      </div>
-                    </div>
+                    <input
+                      type="number"
+                      min="1"
+                      max="100"
+                      value={roiData.closeRate}
+                      onChange={(e) => setRoiData({...roiData, closeRate: parseInt(e.target.value) || 20})}
+                      className="w-full px-6 py-4 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-teal-400 focus:outline-none text-xl"
+                    />
                   </div>
 
                   <div>
-                    <label className="block text-lg font-medium text-slate-300 mb-4">
-                      Average Project Value
+                    <label className="block text-lg font-medium text-slate-300 mb-4 pb-2">
+                      Average Project Value ($)
                     </label>
-                    <div className="space-y-4">
-                      <input
-                        type="range"
-                        min="500"
-                        max="50000"
-                        step="500"
-                        value={roiData.offerPrice}
-                        onChange={(e) => setRoiData({...roiData, offerPrice: parseInt(e.target.value)})}
-                        className="w-full h-3 bg-slate-700 rounded-lg appearance-none cursor-pointer slider"
-                      />
-                      <input
-                        type="number"
-                        min="500"
-                        max="50000"
-                        step="500"
-                        value={roiData.offerPrice}
-                        onChange={(e) => setRoiData({...roiData, offerPrice: parseInt(e.target.value) || 3000})}
-                        className="w-full px-4 py-3 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-teal-400 focus:outline-none text-lg"
-                      />
-                      <div className="flex justify-between text-sm text-slate-400">
-                        <span>$500</span>
-                        <span>$50K</span>
-                      </div>
-                    </div>
+                    <input
+                      type="number"
+                      min="500"
+                      max="50000"
+                      step="500"
+                      value={roiData.offerPrice}
+                      onChange={(e) => setRoiData({...roiData, offerPrice: parseInt(e.target.value) || 3000})}
+                      className="w-full px-6 py-4 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-teal-400 focus:outline-none text-xl"
+                    />
                   </div>
                 </div>
               </div>
@@ -486,31 +440,28 @@ const Index = () => {
                 <h3 className="text-2xl font-bold mb-8 text-white">Your Potential Results</h3>
                 
                 <div className="space-y-6">
-                  <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-600 text-center">
+                  <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-600 text-center">
                     <div className="flex items-center justify-center mb-3">
                       <Clock className="w-8 h-8 text-teal-400 mr-3" />
                       <div className="text-sm text-slate-300">Hours Saved Monthly</div>
                     </div>
-                    <div className="text-4xl font-bold text-white mb-2">{animatedNumbers.hoursSaved}h</div>
-                    <div className="text-teal-400 text-sm">40% time reduction</div>
+                    <div className="text-5xl font-bold text-white mb-2">{animatedNumbers.hoursSaved}h</div>
                   </div>
 
-                  <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-600 text-center">
+                  <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-600 text-center">
                     <div className="flex items-center justify-center mb-3">
                       <Users className="w-8 h-8 text-blue-400 mr-3" />
                       <div className="text-sm text-slate-300">New Clients/Month</div>
                     </div>
-                    <div className="text-4xl font-bold text-white mb-2">+{animatedNumbers.newClients}</div>
-                    <div className="text-blue-400 text-sm">20% close rate</div>
+                    <div className="text-5xl font-bold text-white mb-2">+{animatedNumbers.newClients}</div>
                   </div>
 
-                  <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-600 text-center">
+                  <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-600 text-center">
                     <div className="flex items-center justify-center mb-3">
                       <DollarSign className="w-8 h-8 text-green-400 mr-3" />
                       <div className="text-sm text-slate-300">Added Monthly Revenue</div>
                     </div>
-                    <div className="text-4xl font-bold text-white mb-2">${animatedNumbers.addedRevenue.toLocaleString()}</div>
-                    <div className="text-green-400 text-sm">Pure profit</div>
+                    <div className="text-5xl font-bold text-white mb-2">${animatedNumbers.addedRevenue.toLocaleString()}</div>
                   </div>
                 </div>
               </div>
@@ -530,10 +481,10 @@ const Index = () => {
       </section>
 
       {/* Process Section */}
-      <section id="process" className="py-20 px-6 animate-fade-in">
+      <section id="process" className="py-20 px-8 animate-fade-in">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Our Proven 4-Step Process
             </h2>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -595,34 +546,25 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section id="calendly-section" className="py-20 px-6 bg-gradient-to-r from-slate-800 to-slate-900 animate-fade-in">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+      <section id="calendly-section" className="py-20 px-8 bg-gradient-to-r from-slate-800 to-slate-900 animate-fade-in">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
             Ready to Scale Like a CEO?
           </h2>
           <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
             Book your free audit call and discover exactly how to save 50+ hours monthly while serving more clients
           </p>
           
-          {/* Calendly Embed Placeholder */}
-          <div className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl p-8 border border-slate-600 mb-8">
-            <div className="aspect-video bg-slate-600 rounded-lg flex items-center justify-center mb-6">
-              <div className="text-center">
-                <Calendar className="w-16 h-16 text-teal-400 mx-auto mb-4" />
-                <p className="text-slate-300">Calendly Widget Embed Area</p>
-                <p className="text-sm text-slate-400">https://calendly.com/eitanjacobs/1-on-1</p>
-              </div>
-            </div>
-            <a 
-              href="https://calendly.com/eitanjacobs/1-on-1" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 glow-hover"
-            >
-              <Calendar className="w-6 h-6 mr-2" />
-              Get Your Free Backend Audit + Custom Roadmap
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </a>
+          {/* Calendly Embed */}
+          <div className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl p-4 border border-slate-600 mb-8">
+            <iframe 
+              src="https://calendly.com/eitanjacobs/1-on-1"
+              width="100%"
+              height="700"
+              frameBorder="0"
+              className="rounded-lg"
+              title="Schedule a call with Eitan"
+            ></iframe>
           </div>
 
           <div className="flex flex-wrap justify-center gap-8 text-sm text-slate-400">
@@ -643,10 +585,10 @@ const Index = () => {
       </section>
 
       {/* Who This Isn't For Section */}
-      <section className="py-20 px-6 bg-slate-900/50 animate-fade-in">
+      <section className="py-20 px-8 bg-slate-900/50 animate-fade-in">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Who This Isn't For
             </h2>
           </div>
@@ -674,7 +616,7 @@ const Index = () => {
                 subtext: "and are satisfied with their current growth"
               }
             ].map((item, index) => (
-              <div key={index} className="flex items-start space-x-4 p-6 bg-slate-800/30 rounded-xl border border-slate-700 hover:border-slate-600 transition-colors duration-300">
+              <div key={index} className="flex items-start space-x-4 p-8 bg-slate-800/30 rounded-xl border border-slate-700 hover:border-slate-600 transition-colors duration-300">
                 {item.icon}
                 <div>
                   <p className="text-slate-300 font-medium text-lg">{item.text}</p>
@@ -687,7 +629,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-700 py-12 px-6 bg-slate-900">
+      <footer className="border-t border-slate-700 py-12 px-8 bg-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
@@ -736,26 +678,6 @@ const Index = () => {
 
           .glow-hover:hover {
             box-shadow: 0 0 30px rgba(20, 184, 166, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
-          }
-
-          .slider::-webkit-slider-thumb {
-            appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #14b8a6, #3b82f6);
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
-          }
-
-          .slider::-moz-range-thumb {
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #14b8a6, #3b82f6);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
           }
         `}
       </style>
