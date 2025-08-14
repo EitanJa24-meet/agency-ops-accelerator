@@ -86,11 +86,11 @@ const Index = () => {
       video: true
     },
     {
-      name: "Marcus Johnson",
-      company: "Scale Marketing",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      name: "Or Doron",
+      company: "LeadFlow",
+      image: "/lovable-uploads/efd40486-bb26-4ae9-9d0d-009f9e2e4e93.png",
       quote: "ROI was immediate. Within 30 days, we added 2 new clients with zero extra work hours.",
-      revenue: "$28K/mo",
+      achievement: "Doubled Client Capacity",
       video: false
     }
   ];
@@ -219,10 +219,10 @@ const Index = () => {
         <div className="relative z-10 max-w-6xl mx-auto text-center">
           <div className="mb-8 inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-500/20 to-blue-500/20 rounded-full border border-teal-500/30 backdrop-blur-sm">
             <TrendingUp className="w-5 h-5 mr-2 text-teal-400" />
-            <span className="text-sm text-teal-100">14+ agencies scaled past $25K+/month</span>
+            <span className="text-sm text-teal-100">16+ agencies scaled past $25K+/month</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-teal-100 to-blue-100 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-teal-100 to-blue-100 bg-clip-text text-transparent leading-tight leading-[1.4] pb-2 overflow-visible">
             Get 4+ New Clients/Month Without Working More
           </h1>
           
@@ -255,7 +255,7 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-8">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-4">
-              <p className="text-teal-400 font-semibold text-lg">Trusted by 14+ Businesses</p>
+              <p className="text-teal-400 font-semibold text-lg">Trusted by 16+ Businesses</p>
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -282,7 +282,7 @@ const Index = () => {
       <section id="testimonials" className="py-20 px-8 animate-fade-in">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent leading-[1.4] pb-2 overflow-visible">
               Real Results from Real Agencies
             </h2>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -395,7 +395,7 @@ const Index = () => {
       <section id="what-we-do" className="py-20 px-8 animate-fade-in">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent leading-[1.4] pb-2 overflow-visible">
               Stop Drowning in Busywork—Start Growing Your Agency
             </h2>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed">
