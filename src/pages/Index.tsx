@@ -222,7 +222,7 @@ const Index = () => {
             <span className="text-sm text-teal-100">16+ agencies scaled past $25K+/month</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-teal-100 to-blue-100 bg-clip-text text-transparent leading-tight leading-[1.7] pb-2 overflow-visible">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-teal-100 to-blue-100 bg-clip-text text-transparent leading-tight leading-[11] pb-2 overflow-visible">
             Get 4+ New Clients/Month Without Working More
           </h1>
           
